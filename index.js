@@ -28,3 +28,21 @@ app.get('/api/hello', function (req, res) {
 var listener = app.listen(process.env.PORT || 3000, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
+
+/* Requirements : 
+You should provide your own project, not the example URL.
+Waiting:A request to /api/whoami should return a JSON object with your IP address in the ipaddress key.
+Waiting:A request to /api/whoami should return a JSON object with your preferred language in the language key.
+Waiting:A request to /api/whoami should return a JSON object with your software in the software key.*/
+
+
+app.get('/api/whoami', (req, res)=> {
+const ipAddress = req.socket.remoteAddress;
+const language = req.headers["accept-language"];
+const userAgent = req.headers['user-agent'];
+res.json({
+  "ipaddress": ipAddress,
+  "language": language,
+  "software": userAgent
+})
+});
